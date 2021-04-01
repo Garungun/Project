@@ -1,0 +1,81 @@
+CREATE TABLE farmer (
+	farmerId int(11)not null AUTO_INCREMENT PRIMARY KEY,
+	username varchar(30) not null,
+	email varchar(30) not null,
+	password   varchar(30) not null,
+	fname varchar(30) not null,
+	lname varchar(30) not null,
+	farmname varchar(100) not null,
+	address varchar(100) not null,
+	telno varchar(10) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE goats(
+	goatId varchar(30) not null PRIMARY KEY,
+	goatName varchar(30) not null,
+	sex varchar(10) not null,
+	gene varchar(30) not null,
+	picture LONGBLOB not null,
+	colour varchar(10) not null,
+	dateOfBirth varchar(10) not null,
+	wightOfBirth varchar(10) not null,
+	arrivalDate varchar(10) not null,
+	farmerId int(11)not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+ALTER TABLE `goats` ADD FOREIGN KEY (`farmerId`) REFERENCES `farmer`(`farmerId`) 
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE fatherGoat(
+	fatherId varchar(30) not null PRIMARY KEY,
+	fatherGoatName varchar(30) not null,
+	gene varchar(30) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE motherGoat(
+	motherId varchar(30) not null PRIMARY KEY,
+	motherGoatName varchar(30) not null,
+	gene varchar(30) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE weightUpdate(
+	timePeriod varchar(10) not null,
+	wight varchar(10) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE breedHistory(
+	breedNo varchar(10) not null,
+	dateOfBreed varchar(10) not null,
+	staff varchar(20) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE vaccinationHistory(
+	typeOfVaccine varchar(20) not null,
+	dateOfVaccine varchar(10) not null,
+	staff varchar(20) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE HealthHistory(
+	dateOfHealth varchar(10) not null,
+	attitude varchar(50) not null,
+	staff varchar(20) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE MedicalExamination(
+	typeOfDisease varchar(20) not null,
+	dateExamination varchar(10) not null,
+	Result varchar(20) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE admin (
+	adminId int(11)not null AUTO_INCREMENT PRIMARY KEY,
+	username varchar(30) not null,
+	email varchar(30) not null,
+	password   varchar(30) not null
+)ENGINE=INNODB DEFAULT charset=utf8;
+
+CREATE TABLE Announment (
+	announcementId int(11)not null AUTO_INCREMENT PRIMARY KEY,
+	image LONGBLOB not null,
+	description varchar(100) not null
+)ENGINE=INNODB DEFAULT charset=utf8;

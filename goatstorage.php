@@ -45,7 +45,7 @@
             <label for="female">Female</label>
         </div>
         <div class="input-group">
-            <label for="gene">Confirm Password</label>
+            <label for="gene">Gene</label>
             <input type="text" name="gene">
         </div>
         <div>
@@ -65,11 +65,11 @@
             <input type="text" name="wightOfBirth">
         </div>
         <div class="input-group">
-            <label for="arrivalDate">Tel No.</label>
-            <input type="text" name="arrivalDate">
+            <label for="arrivalDate">Arrival Date</label>
+            <input type="date" id="arrivalDate" name="arrivalDate">
         </div>
         <div class="input-group">
-            <button type="submit" name="reg_user" class="btn">Next</button>
+            <button type="submit" name="storge_goat" class="btn">Next</button>
         </div>
         
     </form>

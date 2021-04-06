@@ -58,6 +58,7 @@
             mysqli_query($conn, $sql);
 
             $_SESSION['username'] = $username;
+            header("location: familygoat.php");
         } else {
             header("location: index.php");
         }

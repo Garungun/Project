@@ -20,7 +20,8 @@ CREATE TABLE goats(
 	dateOfBirth varchar(10) not null,
 	wightOfBirth varchar(10) not null,
 	arrivalDate varchar(10) not null,
-	farmerId int(11)not null
+	farmerId int(11)not null,
+	FOREIGN KEY (farmerId) REFERENCES farmer(farmerId)
 )ENGINE=INNODB DEFAULT charset=utf8;
 
 ALTER TABLE `goats` ADD FOREIGN KEY (`farmerId`) REFERENCES `farmer`(`farmerId`) 

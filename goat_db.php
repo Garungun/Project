@@ -77,8 +77,8 @@
             array_push($errors, "Arrival Date is required");
             $_SESSION['error'] = "Arrival Date is required";
         }
+            
 
-        
         if (count($errors) == 0) {
             
             $sql1 = "INSERT INTO fatherGoat (fatherId, fatherGoatName, fatherGene) 

@@ -38,9 +38,16 @@
             <label for="fatherGoatName">Father Goat Name</label>
             <input type="text" name="fatherGoatName">
         </div>
-        <div class="input-group">
+        <div>
             <label for="fatherGene">Father Gene</label>
-            <input type="text" name="fatherGene">
+            <select id="fatherGene" name="fatherGene">
+                <option value="Anglonubian">Anglonubian</option>
+                <option value="Boer">Boer</option>
+                <option value="Saanen">Saanen</option>
+                <option value="Laoshan">Laoshan</option>
+                <option value="Alpine">Alpine</option>
+                <option value="Toggenburg">Toggenburg</option>
+            </select>    
         </div>
         <div class="input-group">
             <label for="motherId">Mother Goat ID</label>
@@ -50,9 +57,16 @@
             <label for="motherGoatName">Mother Goat Name</label>
             <input type="text" name="motherGoatName">
         </div>
-        <div class="input-group">
+        <div>
             <label for="motherGene">Mother Gene</label>
-            <input type="text" name="motherGene">
+            <select id="motherGene" name="motherGene">
+                <option value="Anglonubian">Anglonubian</option>
+                <option value="Boer">Boer</option>
+                <option value="Saanen">Saanen</option>
+                <option value="Laoshan">Laoshan</option>
+                <option value="Alpine">Alpine</option>
+                <option value="Toggenburg">Toggenburg</option>
+            </select>  
         </div>
         <div class="input-group">
             <label for="goatId">Goat ID</label>
@@ -68,9 +82,16 @@
             <input type="radio" id="female" name="sex" value="female">
             <label for="female">Female</label>
         </div>
-        <div class="input-group">
+        <div>
             <label for="gene">Gene</label>
-            <input type="text" name="gene">
+            <select id="gene" name="gene">
+                <option value="Anglonubian">Anglonubian</option>
+                <option value="Boer">Boer</option>
+                <option value="Saanen">Saanen</option>
+                <option value="Laoshan">Laoshan</option>
+                <option value="Alpine">Alpine</option>
+                <option value="Toggenburg">Toggenburg</option>
+            </select> 
         </div>
         <div>
             <label for="picture">Goat Picture</label><br>

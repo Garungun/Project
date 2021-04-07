@@ -31,6 +31,30 @@
             </div>
         <?php endif ?>
         <div class="input-group">
+            <label for="fatherId">Father Goat ID</label>
+            <input type="text" name="fatherId">
+        </div>
+        <div class="input-group">
+            <label for="fatherGoatName">Father Goat Name</label>
+            <input type="text" name="fatherGoatName">
+        </div>
+        <div class="input-group">
+            <label for="fatherGene">Father Gene</label>
+            <input type="text" name="fatherGene">
+        </div>
+        <div class="input-group">
+            <label for="motherId">Mother Goat ID</label>
+            <input type="text" name="motherId">
+        </div>
+        <div class="input-group">
+            <label for="motherGoatName">Mother Goat Name</label>
+            <input type="text" name="motherGoatName">
+        </div>
+        <div class="input-group">
+            <label for="motherGene">Mother Gene</label>
+            <input type="text" name="motherGene">
+        </div>
+        <div class="input-group">
             <label for="goatId">Goat ID</label>
             <input type="text" name="goatId">
         </div>
@@ -69,7 +93,7 @@
             <input type="date" id="arrivalDate" name="arrivalDate">
         </div>
         <div class="input-group">
-            <button type="submit" name="storge_goat" class="btn">Next</button>
+            <button type="submit" name="storge_goat" class="btn">Submit</button>
         </div>
         
     </form>

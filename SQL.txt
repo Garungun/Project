@@ -21,16 +21,21 @@ CREATE TABLE goats(
 	wightOfBirth varchar(10) not null,
 	arrivalDate varchar(10) not null,
 	farmerId int(11)not null,
+	fatherId varchar(30) not null,
+	motherId varchar(30) not null
 )ENGINE=INNODB DEFAULT charset=utf8;
 
-ALTER TABLE `goats` ADD FOREIGN KEY (`farmerId`) REFERENCES `farmer`(`farmerId`) 
+ALTER TABLE goats ADD FOREIGN KEY (farmerId) REFERENCES farmer (farmerId) 
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE fatherGoat(
 	fatherId varchar(30) not null PRIMARY KEY,
 	fatherGoatName varchar(30) not null,
-	gene varchar(30) not null
+	gene varchar(30) not null	
 )ENGINE=INNODB DEFAULT charset=utf8;
+
+ALTER TABLE goats ADD FOREIGN KEY (fatherId) REFERENCES fatherGoat (fatherId) 
+ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE motherGoat(
 	motherId varchar(30) not null PRIMARY KEY,
@@ -38,34 +43,58 @@ CREATE TABLE motherGoat(
 	gene varchar(30) not null
 )ENGINE=INNODB DEFAULT charset=utf8;
 
+ALTER TABLE goats ADD FOREIGN KEY (motherId) REFERENCES motherGoat (motherId) 
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 CREATE TABLE weightUpdate(
 	timePeriod varchar(10) not null,
-	wight varchar(10) not null
+	wight varchar(10) not null,
+	goatId varchar(30) not null
 )ENGINE=INNODB DEFAULT charset=utf8;
+
+ALTER TABLE weightUpdate ADD FOREIGN KEY (goatId) REFERENCES goats (goatId) 
+ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE breedHistory(
 	breedNo varchar(10) not null,
 	dateOfBreed varchar(10) not null,
-	staff varchar(20) not null
+	staff varchar(20) not null,
+	goatId varchar(30) not null
 )ENGINE=INNODB DEFAULT charset=utf8;
+
+ALTER TABLE breedHistory ADD FOREIGN KEY (goatId) REFERENCES goats (goatId) 
+ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE vaccinationHistory(
 	typeOfVaccine varchar(20) not null,
 	dateOfVaccine varchar(10) not null,
-	staff varchar(20) not null
+	staff varchar(20) not null,
+	goatId varchar(30) not null
 )ENGINE=INNODB DEFAULT charset=utf8;
 
-CREATE TABLE HealthHistory(
+ALTER TABLE vaccinationHistory ADD FOREIGN KEY (goatId) REFERENCES goats (goatId) 
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE healthHistory(
 	dateOfHealth varchar(10) not null,
 	attitude varchar(50) not null,
-	staff varchar(20) not null
+	staff varchar(20) not null,
+	goatId varchar(30) not null
 )ENGINE=INNODB DEFAULT charset=utf8;
 
-CREATE TABLE MedicalExamination(
+ALTER TABLE healthHistory ADD FOREIGN KEY (goatId) REFERENCES goats (goatId) 
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE TABLE medicalExamination(
 	typeOfDisease varchar(20) not null,
 	dateExamination varchar(10) not null,
-	Result varchar(20) not null
+	Result varchar(20) not null,
+	goatId varchar(30) not null
 )ENGINE=INNODB DEFAULT charset=utf8;
+
+ALTER TABLE medicalExamination ADD FOREIGN KEY (goatId) REFERENCES goats (goatId) 
+ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE admin (
 	adminId int(11)not null AUTO_INCREMENT PRIMARY KEY,
@@ -74,8 +103,12 @@ CREATE TABLE admin (
 	password   varchar(30) not null
 )ENGINE=INNODB DEFAULT charset=utf8;
 
-CREATE TABLE Announment (
+CREATE TABLE announment (
 	announcementId int(11)not null AUTO_INCREMENT PRIMARY KEY,
 	image LONGBLOB not null,
-	description varchar(100) not null
+	description varchar(100) not null,
+	adminId int(11)not null
 )ENGINE=INNODB DEFAULT charset=utf8;
+
+ALTER TABLE announment ADD FOREIGN KEY (adminId) REFERENCES admin (adminId) 
+ON DELETE CASCADE ON UPDATE CASCADE;

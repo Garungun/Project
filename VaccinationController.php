@@ -8,34 +8,37 @@ use Illuminate\Http\Request;
 
 class VaccinationController extends Controller
 {
-    public function vaccination(Request $request){
+    public function vaccination(){
         $goats = Goat::orderBy('goatId')->get();
 
         return view('goats.vaccineUpdate', compact('goats'));
 
     }
 
-    public function vaccineUpdate(Request $request){
+    public function vaccineUpdate(Request $request){  
         
-        $request->validate([
-            'typeOfVaccine' => 'required',
-            'dateOfVaccine' => 'required',
-            'vaccine_staff' => 'required',
-            'goat_id' => 'required'      
-        ]);       
-
-            $vaccine = new VaccinationHistory();
-            $vaccine -> typeOfVaccine = $request->typeOfVaccine;
-            $vaccine -> dateOfVaccine = $request->dateOfVaccine;
-            $vaccine -> vaccine_staff = $request->vaccine_staff;
-            $vaccine -> goat_id = $request->goat_id;
             
-            $vaccine -> save();
+            foreach($request->goat_id as $key=>$goat_id){
+                $request->validate([
+                    'typeOfVaccine.*' => 'required',
+                    'dateOfVaccine.*' => 'required',
+                    'vaccine_staff.*' => 'required',
+                    'goat_id.*' => 'required'      
+                ]);      
+                
+                $vaccine = new VaccinationHistory();
+                $vaccine -> goat_id = $goat_id;
+                $vaccine -> typeOfVaccine = $request->typeOfVaccine[$key];
+                $vaccine -> dateOfVaccine = $request->dateOfVaccine[$key];
+                $vaccine -> vaccine_staff = $request->vaccine_staff[$key];  
+            
+                $vaccine -> save();
+            }
 
             if ($vaccine) {
-                return back()->with('success', 'You have been successfully');
+                return redirect()->route('goats.vaccination')->with('success', 'You have been successfully');
             } else {
-                return back()->with('fail', 'Something went wrong');
+                return redirect()->route('goats.vaccination')->with('fail', 'Something went wrong');
             }
 
     }

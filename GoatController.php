@@ -10,14 +10,22 @@ use Illuminate\Support\Facades\DB;
 class GoatController extends Controller
 {
     public function index(){
-        $data['goats'] = Goat::orderBy('goatId','desc')->paginate(6);
+        // $data['goats'] = Goat::orderBy('goatId','desc')->paginate(6);
+        $goats = DB::table('goats')->paginate(5);
         
-        return view('goats.index', $data);
+        return view('goats.index', ['goats' => $goats]);
+        // return view('goats.index', $data);
         
     }
 
     public function create(){
         return view('goats.create');
+    }
+
+    public function search(Request $request){
+        $search = $request->get('search');
+        $goats = DB::table('goats')->where('goatId', 'like', '%'.$search.'%')->paginate(5);
+        return view('goats.index', ['goats' => $goats]);
     }
     
     public function store(Request $request){             

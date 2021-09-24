@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,18 +8,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
 </head>
 <body>
+
 <div class="container mt-2">
-<div class="row">
+    <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h2>Goat</h2>
             </div>
-            <div class="pull-right mb-2">
+            <div class="pull-right md-2">
                 <a class="btn btn-success" href="{{ route('goats.create') }}"> Create New Post</a>
                 <a class="btn btn-primary" href="{{ route('goats.updateHome') }}"> Update</a>                
-            </div>
+            </div><br>            
         </div>
+        <div class="col-md-4">
+        <form action="{{ route('goats.seacrh') }}" method="get">
+            <div class="input-group">
+                <input type="search" name="search" class="form-control">
+                <span class="input-group-prepend">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </span>
+            </div>
+        </form>
+        </div>
+        
     </div>
+    <br>
    
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -54,8 +69,11 @@
             </td>
         </tr>
         @endforeach
+        
     </table>
-  
-    {!! $goats->links() !!}
+    {{ $goats->links() }}
+</div>
 </body>
+
 </html>
+

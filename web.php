@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->middleware('auth');
 
 Auth::routes();
 
@@ -33,6 +33,7 @@ Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home
 
 Route::resource('goats',GoatController::class)->middleware('auth');
 Route::get('homeUpdate',[GoatController::class, 'homeUpdate'])->middleware('auth')->name('goats.updateHome');
+Route::get('search', [GoatController::class, 'search'])->middleware('auth')->name('goats.seacrh');
 
 Route::get('breed',[MotherBreedingController::class, 'breed'])->middleware('auth')->name('goats.breed');
 Route::post('updateBreed',[MotherBreedingController::class, 'updateBreed'])->name('goats.updateBreed');
@@ -45,6 +46,7 @@ Route::post('healthUpdate',[HealthHistoryController::class, 'healthUpdate'])->na
 
 Route::get('medical',[MedicalExaminationController::class, 'medical'])->middleware('auth')->name('goats.medical');
 Route::post('medicalUpdate',[MedicalExaminationController::class, 'medicalUpdate'])->name('goats.medicalUpdate');
+
 Route::get('vaccination',[VaccinationController::class, 'vaccination'])->middleware('auth')->name('goats.vaccination');
 Route::post('vaccineUpdate',[VaccinationController::class, 'vaccineUpdate'])->name('goats.vaccineUpdate');
 

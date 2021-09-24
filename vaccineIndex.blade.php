@@ -17,7 +17,7 @@
                 <h2>Goat</h2>
             </div>
             <div class="pull-right md-2">
-                <a class="btn btn-success" href="{{ route('goats.create') }}"> Create New Post</a>
+                <a class="btn btn-primary" href="{{ route('goats.vaccination') }}"> vaccineUpdate</a>
                 <a class="btn btn-primary" href="{{ route('goats.updateHome') }}"> Update</a>                
             </div><br>            
         </div>
@@ -40,12 +40,9 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <form method="post">
-        @csrf
-        @method('DELETE')
-        
-        <button formaction="{{ route('goats.deleteall') }}" type="submit" class="btn btn-danger">Delete All Selected</button>
-   
+
+   <form action="" method="post">
+    @csrf
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -54,23 +51,16 @@
             <th>Image</th>
             <th>Name</th>
             <th>Gene</th>
-            <th width="280px">Action</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($goats as $goat)
         <tr>
-            <td><input type="checkbox" name="ids[]" class="selectbox" value="{{$goat->goatId}}"> </td>
+            <td><input type="checkbox" name="ids[]" class="selectbox" value="{{$goat->goatId }}"> </td>
             <td>{{ $goat->goatId }}</td>
             <td><img src="{{ Storage::url($goat->image) }}" height="75" width="75" alt="" /></td>
             <td>{{ $goat->goatName }}</td>
-            <td>{{ $goat->gene }}</td>
-            <td>              
-    
-                    <a class="btn btn-primary" href="{{ route('goats.edit',$goat->goatId) }}">Edit</a>
-                    <button formaction="{{ route('goats.destroy',$goat->goatId) }}" type="submit" class="btn btn-danger">Delete</button>  
-                
-            </td>
+            <td>{{ $goat->gene }}</td>            
         </tr>
         @endforeach
         </tbody>
@@ -81,11 +71,10 @@
             <th>Image</th>
             <th>Name</th>
             <th>Gene</th>
-            <th width="280px">Action</th>
         </tr>
         </tfoot>
+        
     </table>
-    </form>
     {{ $goats->links() }}
     <script type="text/javascript">
     $('.selectall').click(function(){

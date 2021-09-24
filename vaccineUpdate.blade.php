@@ -100,10 +100,10 @@
     $('thead').on('click', '.addRow', function(){
         var tr = '<tr>'+
         '<td>'+
-            '<select name="goat_id[]" class="form-control" id="goat_id" {{ (collect(old("goat_id"))->contains($goat->goatId)) ? "selected":"" }}>'+
+            '<select name="goat_id[]" class="form-control" id="goat_id" >'+
                 '<option value="">--Select--</option>'+
                 '@foreach($goats AS $goat)'+
-                '<option value="{{ $goat->goatId }}">{{ $goat->goatId }}</option>'+
+                '<option value="{{ $goat->goatId }}" {{ (collect(old("goat_id"))->contains($goat->goatId)) ? "selected":"" }}>{{ $goat->goatId }}</option>'+
                 '@endforeach'+
             '</select>'+
             '@error("goat_id.*")'+

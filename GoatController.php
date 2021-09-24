@@ -10,11 +10,9 @@ use Illuminate\Support\Facades\DB;
 class GoatController extends Controller
 {
     public function index(){
-        // $data['goats'] = Goat::orderBy('goatId','desc')->paginate(6);
         $goats = DB::table('goats')->paginate(5);
         
         return view('goats.index', ['goats' => $goats]);
-        // return view('goats.index', $data);
         
     }
 
@@ -137,6 +135,12 @@ class GoatController extends Controller
     
         return redirect()->route('goats.index')
                         ->with('success','Goat has been deleted successfully');
+    }
+
+    public function deleteAll(Request $request){
+        $ids = $request->get('ids');
+        $dbs = DB::table('goats')->whereIn('goatId', $ids)->delete();
+        return redirect()->route('goats.index');
     }
     
     public function homeUpdate(){

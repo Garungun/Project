@@ -28,12 +28,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'edit'])->name('user.edit_profile');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
 
 Route::resource('goats',GoatController::class)->middleware('auth');
 Route::get('homeUpdate',[GoatController::class, 'homeUpdate'])->middleware('auth')->name('goats.updateHome');
-Route::get('search', [GoatController::class, 'search'])->middleware('auth')->name('goats.seacrh');
+Route::get('search', [GoatController::class, 'search'])->middleware('auth')->name('goats.search');
+Route::delete('deleteall', [GoatController::class, 'deleteAll'])->middleware('auth')->name('goats.deleteall');
 
 Route::get('breed',[MotherBreedingController::class, 'breed'])->middleware('auth')->name('goats.breed');
 Route::post('updateBreed',[MotherBreedingController::class, 'updateBreed'])->name('goats.updateBreed');
@@ -47,6 +49,7 @@ Route::post('healthUpdate',[HealthHistoryController::class, 'healthUpdate'])->na
 Route::get('medical',[MedicalExaminationController::class, 'medical'])->middleware('auth')->name('goats.medical');
 Route::post('medicalUpdate',[MedicalExaminationController::class, 'medicalUpdate'])->name('goats.medicalUpdate');
 
+Route::get('vaccineIndex',[App\Http\Controllers\VaccinationController::class, 'index'])->middleware('auth')->name('goats.vaccineIndex');
 Route::get('vaccination',[VaccinationController::class, 'vaccination'])->middleware('auth')->name('goats.vaccination');
 Route::post('vaccineUpdate',[VaccinationController::class, 'vaccineUpdate'])->name('goats.vaccineUpdate');
 

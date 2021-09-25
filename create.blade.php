@@ -1,210 +1,222 @@
+@extends('layouts.app')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Blog Post Form - Laravel 8 CRUD Tutorial</title>
+@section('content')
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<div class="container mt-2">
-  
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left mb-2">
-            <h2>Add New Goat</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('goats.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
-   
-  @if(session('status'))
-    <div class="alert alert-success mb-1 mt-1">
-        {{ session('status') }}
-    </div>
-  @endif
-   
-<form action="{{ route('goats.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
-  
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Father Goat ID:</strong>
-                <input type="text" name="fatherId" class="form-control" placeholder="Father Goat ID" value="{{ old('fatherId') }}"> 
-               @error('fatherId')
-                  <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-               @enderror
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Father Goat Name:</strong>
-                <input type="text" name="fatherGoatName" class="form-control" placeholder="Father Goat Name" value="{{ old('fatherGoatName') }}">
-               @error('fatherGoatName')
-                  <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-               @enderror
-            </div>
-        </div>    
-        <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Father Gene:</strong>                    
-                    <select id="fatherGene" name="fatherGene" class="form-control">
-                        <option value="">--Select--</option>
-                        <option value="Anglonubian" @if (old('fatherGene') == "Anglonubian") {{ 'selected' }} @endif>Anglonubian</option>
-                        <option value="Boer" @if (old('fatherGene') == "Boer") {{ 'selected' }} @endif>Boer</option>
-                        <option value="Saanen" @if (old('fatherGene') == "Saanen") {{ 'selected' }} @endif>Saanen</option>
-                        <option value="Laoshan" @if (old('fatherGene') == "Laoshan") {{ 'selected' }} @endif>Laoshan</option>
-                        <option value="Alpine" @if (old('fatherGene') == "Alpine") {{ 'selected' }} @endif>Alpine</option>
-                        <option value="Toggenburg" @if (old('fatherGene') == "Toggenburg") {{ 'selected' }} @endif>Toggenburg</option>
-                    </select> 
-                    @error('fatherGene')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Mother Goat ID:</strong>
-                    <input type="text" name="motherId" class="form-control" placeholder="Mother Goat ID" value="{{ old('motherId') }}">
-                    @error('motherId')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Mother Goat Name:</strong>
-                    <input type="text" name="motherGoatName" class="form-control" placeholder="Mother Goat Name" value="{{ old('motherGoatName') }}">
-                    @error('motherGoatName')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Mother Gene:</strong>                    
-                    <select id="motherGene" name="motherGene" class="form-control">
-                        <option value="">--Select--</option>
-                        <option value="Anglonubian" @if (old('motherGene') == "Anglonubian") {{ 'selected' }} @endif>Anglonubian</option>
-                        <option value="Boer" @if (old('motherGene') == "Boer") {{ 'selected' }} @endif>Boer</option>
-                        <option value="Saanen" @if (old('motherGene') == "Saanen") {{ 'selected' }} @endif>Saanen</option>
-                        <option value="Laoshan" @if (old('motherGene') == "Laoshan") {{ 'selected' }} @endif>Laoshan</option>
-                        <option value="Alpine" @if (old('motherGene') == "Alpine") {{ 'selected' }} @endif>Alpine</option>
-                        <option value="Toggenburg" @if (old('motherGene') == "Toggenburg") {{ 'selected' }} @endif>Toggenburg</option>
-                    </select> 
-                    @error('motherGene')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Goat ID:</strong>
-                    <input type="text" name="goatId" class="form-control" placeholder="Goat ID" value="{{ old('goatId') }}">
-                    @error('goatId')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Goat Name:</strong>
-                    <input type="text" name="goatName" class="form-control" placeholder="Goat Name" value="{{ old('goatName') }}">
-                    @error('goatName')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Sex: </strong>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="male" name="sex" value="male" @if (old('sex') == "male") {{ 'checked' }} @endif>
-                        <label for="male" class="form-check-label">Male</label>
+
+        <head>
+        <title>Add Blog Post Form - Laravel 8 CRUD Tutorial</title>
+
+        <script src="https://unpkg.com/feather-icons"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="path/to/dist/feather.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+        </script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+        <link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <link href="https://getbootstrap.com/docs/5.0/examples/carousel/carousel.css" rel="stylesheet">
+        <link rel="stylesheet" href="resources/css/style.css">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            .dropdown-menu {
+                margin: 0px;
+                padding: 0;
+            }
+            .row {
+                border: 10px solid #80C2B6;
+                margin: auto;
+                max-width: 900px;
+                border-radius: 10px;
+                border-top-width: 50px;
+                padding: 12px;
+            }
+            .grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 15px;
+                row-gap: 5px;
+            }
+            h4 {
+                text-align: center;
+            }
+            .submit {
+                text-align: center;
+            }
+        </style>
+
+
+    </head>
+
+    <body>
+
+        <main>
+
+            <div class="container">
+
+                @if (session('status'))
+                    <div class="alert alert-success mb-1 mt-1">
+                        {{ session('status') }}
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input type="radio" class="form-check-input" id="female" name="sex" value="female" @if (old('sex') == "female") {{ 'checked' }} @endif>
-                        <label class="form-check-label" for="female" >Female</label>
-                    </div>                    
-                    @error('sex')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Gene:</strong>
-                    <select id="gene" name="gene" class="form-control">
-                        <option value="">--Select--</option>
-                        <option value="Anglonubian" @if (old('gene') == "Anglonubian") {{ 'selected' }} @endif>Anglonubian</option>
-                        <option value="Boer" @if (old('gene') == "Boer") {{ 'selected' }} @endif>Boer</option>
-                        <option value="Saanen" @if (old('gene') == "Saanen") {{ 'selected' }} @endif>Saanen</option>
-                        <option value="Laoshan" @if (old('gene') == "Laoshan") {{ 'selected' }} @endif>Laoshan</option>
-                        <option value="Alpine" @if (old('gene') == "Alpine") {{ 'selected' }} @endif>Alpine</option>
-                        <option value="Toggenburg" @if (old('gene') == "Toggenburg") {{ 'selected' }} @endif>Toggenburg</option>
-                    </select> 
-                    @error('gene')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Colour:</strong>
-                    <input type="text" name="colour" class="form-control" placeholder="Colour" value="{{ old('colour') }}">
-                    @error('colour')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Date Of Birth:</strong>
-                    <input type="date" name="dateOfBirth" class="form-control" placeholder="Date Of Birth" value="{{ old('dateOfBirth') }}">
-                    @error('dateOfBirth')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Weight Of Birth:</strong>
-                    <input type="text" name="weightOfBirth" class="form-control" placeholder="Weight Of Birth" value="{{ old('weightOfBirth') }}">
-                    @error('weightOfBirth')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Arrival Date:</strong>
-                    <input type="date" name="arrivalDate" class="form-control" placeholder="Arrival Date" value="{{ old('arrivalDate') }}">
-                    @error('arrivalDate')
-                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Goat Image:</strong>
-                 <input type="file" name="image" class="form-control" placeholder="Goat Title" value="{{ old('image') }}">
-                @error('image')
-                  <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-               @enderror
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary ml-3">Submit</button>
-    </div>
-   
-</form>
+                @endif
 
-</body>
-</html>
+                <form action="{{ route('goats.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
+                    <div class="row">
+                        <div class="col-md-auto"></div>
+                        <div class="col-md-auto">
+                            <h4>สร้างทะเบียนเเพะ</h4>
+
+                            <h5>พ่อพันธุ์เเม่พันธุ์เเพะ</h5>
+                            <div class="grid">
+                                <div class="mb-2">
+                                    <label for="fatherId">รหัสพ่อพันธุ์เเพะ</label>
+                                    <input type="text" class="form-control" name="fatherId"
+                                        value="{{ old('fatherId') }}">
+                                    <span class="text-danger">@error('fatherId'){{ $message }}@enderror</span>
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <label for="fatherGoatName">ชื่อพ่อพันธุ์เเพะ</label>
+                                        <input type="text" class="form-control" name="fatherGoatName"
+                                            value="{{ old('fatherGoatName') }}">
+                                        <span
+                                            class="text-danger">@error('fatherGoatName'){{ $message }}@enderror</span>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="fatherGene">พันธุ์</label>
+                                            <br><select id="fatherGene" name="fatherGene" class="form-control">
+                                                <option value="">--Select--</option>
+                                                <option value="พันธุ์แองโกลนูเบียน (Anglonubian)" @if (old('fatherGene') == "พันธุ์แองโกลนูเบียน (Anglonubian)") {{ 'selected' }} @endif>พันธุ์แองโกลนูเบียน (Anglonubian)</option>
+                                                <option value="พันธุ์บอร์ (Boer)" @if (old('fatherGene') == "พันธุ์บอร์ (Boer)") {{ 'selected' }} @endif>พันธุ์บอร์ (Boer)</option>
+                                                <option value="พันธุ์ซาเนน (Saanen)" @if (old('fatherGene') == "พันธุ์ซาเนน (Saanen)") {{ 'selected' }} @endif>พันธุ์ซาเนน (Saanen)</option>
+                                                <option value="พันธุ์หลาวซาน (Laoshan)" @if (old('fatherGene') == "พันธุ์หลาวซาน (Laoshan)") {{ 'selected' }} @endif>พันธุ์หลาวซาน (Laoshan)</option>
+                                                <option value="พันธุ์อัลไพน์ (Alpine)" @if (old('fatherGene') == "พันธุ์อัลไพน์ (Alpine)") {{ 'selected' }} @endif>พันธุ์อัลไพน์ (Alpine)</option>
+                                                <option value="พันธุ์ทอกเก็นเบอร์ก (Toggenburg)" @if (old('fatherGene') == "พันธุ์ทอกเก็นเบอร์ก (Toggenburg)") {{ 'selected' }} @endif>พันธุ์ทอกเก็นเบอร์ก (Toggenburg)</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="motherId">รหัสเเม่พันธุ์เเพะ</label>
+                                            <input type="text" class="form-control" name="motherId"
+                                                value="{{ old('motherId') }}">
+                                            <span class="text-danger">@error('motherId'){{ $message }}@enderror</span>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="motherGoatName">ชื่อเเม่พันธุ์เเพะ</label>
+                                                <input type="text" class="form-control" name="motherGoatName"
+                                                    value="{{ old('motherGoatName') }}">
+                                                <span
+                                                    class="text-danger">@error('motherGoatName'){{ $message }}@enderror</span>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label for="motherGene">พันธุ์</label>
+                                                    <br><select id="motherGene" name="motherGene" class="form-control">
+                                                    <option value="">--Select--</option>
+                                                    <option value="พันธุ์แองโกลนูเบียน (Anglonubian)" @if (old('motherGene') == "พันธุ์แองโกลนูเบียน (Anglonubian)") {{ 'selected' }} @endif>พันธุ์แองโกลนูเบียน (Anglonubian)</option>
+                                                    <option value="พันธุ์บอร์ (Boer)" @if (old('motherGene') == "พันธุ์บอร์ (Boer)") {{ 'selected' }} @endif>พันธุ์บอร์ (Boer)</option>
+                                                    <option value="พันธุ์ซาเนน (Saanen)" @if (old('motherGene') == "พันธุ์ซาเนน (Saanen)") {{ 'selected' }} @endif>พันธุ์ซาเนน (Saanen)</option>
+                                                    <option value="พันธุ์หลาวซาน (Laoshan)" @if (old('motherGene') == "พันธุ์หลาวซาน (Laoshan)") {{ 'selected' }} @endif>พันธุ์หลาวซาน (Laoshan)</option>
+                                                    <option value="พันธุ์อัลไพน์ (Alpine)" @if (old('motherGene') == "พันธุ์อัลไพน์ (Alpine)") {{ 'selected' }} @endif>พันธุ์อัลไพน์ (Alpine)</option>
+                                                    <option value="พันธุ์ทอกเก็นเบอร์ก (Toggenburg)" @if (old('motherGene') == "พันธุ์ทอกเก็นเบอร์ก (Toggenburg)") {{ 'selected' }} @endif>พันธุ์ทอกเก็นเบอร์ก (Toggenburg)</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <h5>ข้อมูลประจำตัวเเพะ</h5>
+                                            <div class="grid">
+                                                <div class="form-group mb-2">
+                                                    <label for="goatId">รหัสประจำตัวเเพะ</label>
+                                                    <input type="text" class="form-control" name="goatId" value="{{ old('goatId') }}">
+                                                    <span class="text-danger">@error('goatId'){{ $message }}@enderror</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="goatName">ชื่อเเพะ</label>
+                                                        <input type="text" class="form-control" name="goatName"
+                                                            value="{{ old('goatName') }}">
+                                                        <span class="text-danger">@error('goatName'){{ $message }}@enderror</span>
+                                                        </div>
+                                                        <div class="form-group mb-2">
+                                                            <label for="sex" >เพศ</label>
+                                                            <br>
+                                                            <div class="form-check form-check-inline">
+                                                                <input type="radio" class="form-check-input" id="male" name="sex" value="เพศผู้" @if (old('sex') == "เพศผู้") {{ 'checked' }} @endif>
+                                                                <label for="male" class="form-check-label">เพศผู้</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline">
+                                                                <input type="radio" class="form-check-input" id="female" name="sex" value="เพศเมีย" @if (old('sex') == "เพศเมีย") {{ 'checked' }} @endif>
+                                                                <label class="form-check-label" for="female" >เพศเมีย</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group mb-2">
+                                                            <label for="gene">พันธุ์</label>
+                                                            <br><select id="gene" name="gene" class="form-control">
+                                                            <option value="">--Select--</option>
+                                                            <option value="พันธุ์แองโกลนูเบียน (Anglonubian)" @if (old('gene') == "พันธุ์แองโกลนูเบียน (Anglonubian)") {{ 'selected' }} @endif>พันธุ์แองโกลนูเบียน (Anglonubian)</option>
+                                                            <option value="พันธุ์บอร์ (Boer)" @if (old('gene') == "พันธุ์บอร์ (Boer)") {{ 'selected' }} @endif>พันธุ์บอร์ (Boer)</option>
+                                                            <option value="พันธุ์ซาเนน (Saanen)" @if (old('gene') == "พันธุ์ซาเนน (Saanen)") {{ 'selected' }} @endif>พันธุ์ซาเนน (Saanen)</option>
+                                                            <option value="พันธุ์หลาวซาน (Laoshan)" @if (old('gene') == "พันธุ์หลาวซาน (Laoshan)") {{ 'selected' }} @endif>พันธุ์หลาวซาน (Laoshan)</option>
+                                                            <option value="พันธุ์อัลไพน์ (Alpine)" @if (old('gene') == "พันธุ์อัลไพน์ (Alpine)") {{ 'selected' }} @endif>พันธุ์อัลไพน์ (Alpine)</option>
+                                                            <option value="พันธุ์ทอกเก็นเบอร์ก (Toggenburg)" @if (old('gene') == "พันธุ์ทอกเก็นเบอร์ก (Toggenburg)") {{ 'selected' }} @endif>พันธุ์ทอกเก็นเบอร์ก (Toggenburg)</option>
+                                                        </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="colour">สี :</label>
+                                                            <input type="text" class="form-control" name="colour" value="{{ old('colour') }}">
+                                                            <span class="text-danger">@error('colour'){{ $message }}@enderror</span>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="dateOfBirth">วัน/เดือน/ปีเกิด (พ.ศ.) :</label>
+                                                                <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-control" value="{{ old('dateOfBirth') }}">
+                                                                <span class="text-danger">@error('dateOfBirth'){{ $message }}@enderror</span>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="image">รูปแพะ :</label>
+                                                                    <input type="file" name="image" class="form-control" placeholder="Goat Title" value="{{ old('image') }}">
+                                                                    @error('image')
+                                                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                                                    @enderror
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="weightOfBirth">น้ำหนัก (ก.ก.) :</label>
+                                                                    <input type="text" class="form-control" name="weightOfBirth"
+                                                                        value="{{ old('weightOfBirth') }}">
+                                                                    <span class="text-danger">@error('weightOfBirth'){{ $message }}@enderror</span>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="arrivalDate">วัน/เดือน/ปี ที่มาถึง :</label>
+                                                                        <input type="date" id="arrivalDate" name="arrivalDate" class="form-control" value="{{ old('weightOfBirth') }}">
+                                                                        <span class="text-danger">@error('arrivalDate'){{ $message }}@enderror</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="submit">
+                                                                        <button type="submit" class="btn"
+                                                                            style="background-color: #80C2B6;">ยืนยันการลงทะเบียนเเพะ</button>
+                                                                        <a class="btn " style="background-color: #a7afac;"
+                                                                            href="{{ route('goats.index') }}">ไปยังหน้าทะเบียนเเพะ</a>
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                        </form>
+
+                                            </body>
+
+                                        </html>
+                                        @endsection

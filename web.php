@@ -7,7 +7,7 @@ use App\Http\Controllers\MedicalExaminationController;
 use App\Http\Controllers\MotherBreedingController;
 use App\Http\Controllers\VaccinationController;
 use App\Http\Controllers\WeightUpdateController;
-use App\Models\Goat;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +26,15 @@ Route::get('/', function () {
     return view('home');
 })->middleware('auth');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'edit'])->name('user.edit_profile');
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('admin/home', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'edit'])->name('user.edit_profile');
+
+
 
 Route::resource('goats',GoatController::class)->middleware('auth');
 Route::get('homeUpdate',[GoatController::class, 'homeUpdate'])->middleware('auth')->name('goats.updateHome');
@@ -49,7 +53,22 @@ Route::post('healthUpdate',[HealthHistoryController::class, 'healthUpdate'])->na
 Route::get('medical',[MedicalExaminationController::class, 'medical'])->middleware('auth')->name('goats.medical');
 Route::post('medicalUpdate',[MedicalExaminationController::class, 'medicalUpdate'])->name('goats.medicalUpdate');
 
-Route::get('vaccineIndex',[App\Http\Controllers\VaccinationController::class, 'index'])->middleware('auth')->name('goats.vaccineIndex');
 Route::get('vaccination',[VaccinationController::class, 'vaccination'])->middleware('auth')->name('goats.vaccination');
 Route::post('vaccineUpdate',[VaccinationController::class, 'vaccineUpdate'])->name('goats.vaccineUpdate');
+
+
+Route::group(['middleware' => 'web'], function () {
+
+    Route::get('/edit-profile', [UserController::class, 'editprofile']);
+    
+    Route::post('/edit-profile', [UserController::class, 'saveeditprofile']);
+
+    Route::post('change-password', [UserController::class, 'store'])->name('change.password');
+    
+    });
+
+
+   
+
+   
 
